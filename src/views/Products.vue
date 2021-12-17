@@ -1,15 +1,15 @@
 <template>
   <div :key="carList">
     <card-client
-      :list="listClients"
+      :list="listProducts"
       :view="view"
       @dataToEdit="dataToEdit($event)"
     />
     <form-client
-      v-if="crateNewClient || editData"
-      :newClient="crateNewClient"
+      v-if="newProduct || editData"
+      :newProduct="newProduct"
       :dataEdit="dataSelected"
-      :editDataClient="editData"
+      :editDataProduct="editData"
       @reloadCard="newList()"
       :key="form"
     />
@@ -37,24 +37,24 @@
 </template>
 
 <script>
-import { clients } from "@/mock/Moks";
+import { productsList } from "@/mock/MoksProducts";
 import CardClient from "../components/Card.vue";
 import FormClient from "../components/Form.vue";
 export default {
   data() {
     return {
-      listClients: [],
-      crateNewClient: false,
+      listProducts: [],
+      newProduct: false,
       carList: 0,
       editData: false,
       dataSelected: {},
       form: 0,
-      view: "client",
+      view: "products",
     };
   },
 
   created() {
-    this.listClients = [...clients.data];
+    this.listProducts = [...productsList.data];
   },
   components: {
     CardClient,
@@ -63,17 +63,15 @@ export default {
   methods: {
     newClient() {
       this.form += 1;
-      this.crateNewClient = true;
+      this.newProduct = true;
       this.editData = false;
     },
     newList() {
-      this.listClients = [...clients.data];
-      this.editData = false;
-      this.crateNewClient = false;
+      this.listProducts = [...productsList.data];
     },
     dataToEdit(event) {
       this.form += 1;
-      this.crateNewClient = false;
+      this.newProduct = false;
       this.editData = true;
       this.dataSelected = event;
     },

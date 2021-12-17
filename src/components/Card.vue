@@ -2,26 +2,45 @@
   <div>
     <v-container>
       <v-row>
-        <v-col v-for="(client, i) in listClients" :key="i" cols="4">
+        <v-col v-for="(item, i) in list" :key="i" cols="4">
           <v-card class="mx-auto" max-width="344" elevation="5" outlined>
             <v-list-item three-line>
               <v-list-item-content>
                 <v-list-item-title class="text-h5 mb-1">
-                  {{ client.name }}
+                  {{ item.name }}
                 </v-list-item-title>
                 <v-list-item-subtitle>
-                  {{ client.document }}
+                  {{
+                    item.ref
+                      ? "Referencia: "
+                      : item.document
+                      ? "Documento: "
+                      : ""
+                  }}
+                  {{ item.document || item.ref }}
                 </v-list-item-subtitle>
                 <v-list-item-subtitle>
-                  {{ client.email }}
+                  {{ item.ref ? "Valor: " : item.email ? "Email: " : "" }}
+                  {{ item.email || item.value }}
                 </v-list-item-subtitle>
                 <v-list-item-subtitle>
-                  {{ client.celphone }}
+                  {{
+                    item.stock
+                      ? "Inventario: "
+                      : item.celphone
+                      ? "Celular: "
+                      : ""
+                  }}
+                  {{ item.celphone || item.stock }}
+                </v-list-item-subtitle>
+                <v-list-item-subtitle>
+                  {{ item.description ? "Descripción: " : "" }}
+                  {{ item.description }}
                 </v-list-item-subtitle>
               </v-list-item-content>
             </v-list-item>
             <v-card-actions>
-              <v-btn outlined rounded text @click="edit(client)"> Editar </v-btn>
+              <v-btn outlined rounded text @click="edit(item)"> Editar </v-btn>
             </v-card-actions>
           </v-card>
         </v-col>
@@ -34,16 +53,21 @@
 export default {
   name: "CardClient",
   data() {
-    return {};
+    return {
+      title: [],
+    };
   },
   props: {
-    listClients: {
+    list: {
       type: Array,
+    },
+    view: {
+      type: String,
     },
   },
   methods: {
     edit(data) {
-      this.$emit('dataToEdit',data)
+      this.$emit("dataToEdit", data);
     },
   },
 };

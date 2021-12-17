@@ -2,8 +2,6 @@
   <v-app class="pb-5">
     <v-app-bar app color="primary" dark>
       <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
-
-     
     </v-app-bar>
     <v-navigation-drawer v-model="drawer" absolute temporary>
       <v-list nav dense>
@@ -18,18 +16,15 @@
           >
             <v-list-item-title> Clientes </v-list-item-title>
           </v-list-item>
-
-          <v-list-item>
-            <v-list-item-title>Bar</v-list-item-title>
+          <v-list-item
+            :to="{
+              name: 'Products',
+            }"
+          >
+            <v-list-item-title> Productos </v-list-item-title>
           </v-list-item>
 
-          <v-list-item>
-            <v-list-item-title>Fizz</v-list-item-title>
-          </v-list-item>
-
-          <v-list-item>
-            <v-list-item-title>Buzz</v-list-item-title>
-          </v-list-item>
+          
         </v-list-item-group>
       </v-list>
     </v-navigation-drawer>
